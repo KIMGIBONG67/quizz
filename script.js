@@ -1,5 +1,5 @@
 const puzzle = [
-    // 가로 (Across)
+    // 가로 (Across) - 별도의 번호 체계를 가집니다.
     { start: { row: 0, col: 0 }, direction: 'across', word: '인공지능전문가', clue: '1. AI 기술을 개발하고 연구하는 사람', length: 7 },
     { start: { row: 2, col: 0 }, direction: 'across', word: '데이터사이언티스트', clue: '2. 대량의 데이터를 분석하고 예측하는 전문가', length: 10 },
     { start: { row: 4, col: 1 }, direction: 'across', word: '사물인터넷개발자', clue: '3. 스마트 기기 간의 연결을 만드는 개발자', length: 9 },
@@ -11,17 +11,17 @@ const puzzle = [
     { start: { row: 16, col: 1 }, direction: 'across', word: '클라우드엔지니어', clue: '9. 가상 서버 및 저장 공간을 관리하는 기술자', length: 9 },
     { start: { row: 18, col: 0 }, direction: 'across', word: '3D프린팅전문가', clue: '10. 3차원 물체를 출력하는 기술자', length: 9 },
     
-    // 세로 (Down)
-    { start: { row: 0, col: 0 }, direction: 'down', word: '인플루언서', clue: '11. SNS에서 영향력을 행사하는 사람', length: 5 },
-    { start: { row: 0, col: 2 }, direction: 'down', word: '게임스트리머', clue: '12. 온라인 게임 방송을 진행하는 사람', length: 6 },
-    { start: { row: 0, col: 4 }, direction: 'down', word: '챗봇개발자', clue: '13. 대화형 인공지능 프로그램을 만드는 사람', length: 5 },
-    { start: { row: 0, col: 6 }, direction: 'down', word: 'UXUI디자이너', clue: '14. 사용자가 편리하게 제품을 사용할 수 있도록 디자인하는 사람', length: 7 },
-    { start: { row: 0, col: 8 }, direction: 'down', word: '블록체인개발자', clue: '15. 분산원장기술을 활용한 시스템을 만드는 사람', length: 7 },
-    { start: { row: 1, col: 10 }, direction: 'down', word: '에너지효율관리사', clue: '16. 건물의 에너지 사용을 최적화하는 전문가', length: 8 },
-    { start: { row: 3, col: 1 }, direction: 'down', word: '스마트시티전문가', clue: '17. 도시의 문제 해결을 위해 기술을 적용하는 사람', length: 8 },
-    { start: { row: 5, col: 3 }, direction: 'down', word: 'VRAR콘텐츠크리에이터', clue: '18. 가상/증강 현실 콘텐츠를 만드는 사람', length: 11 },
-    { start: { row: 7, col: 5 }, direction: 'down', word: '자율주행차개발자', clue: '19. 스스로 운전하는 자동차를 만드는 사람', length: 8 },
-    { start: { row: 9, col: 7 }, direction: 'down', word: '보안전문가', clue: '20. 네트워크 및 시스템을 해킹으로부터 보호하는 사람', length: 5 },
+    // 세로 (Down) - 별도의 번호 체계를 가집니다.
+    { start: { row: 0, col: 0 }, direction: 'down', word: '인플루언서', clue: '1. SNS에서 영향력을 행사하는 사람', length: 5 },
+    { start: { row: 0, col: 2 }, direction: 'down', word: '게임스트리머', clue: '2. 온라인 게임 방송을 진행하는 사람', length: 6 },
+    { start: { row: 0, col: 4 }, direction: 'down', word: '챗봇개발자', clue: '3. 대화형 인공지능 프로그램을 만드는 사람', length: 5 },
+    { start: { row: 0, col: 6 }, direction: 'down', word: 'UXUI디자이너', clue: '4. 사용자가 편리하게 제품을 사용할 수 있도록 디자인하는 사람', length: 7 },
+    { start: { row: 0, col: 8 }, direction: 'down', word: '블록체인개발자', clue: '5. 분산원장기술을 활용한 시스템을 만드는 사람', length: 7 },
+    { start: { row: 1, col: 10 }, direction: 'down', word: '에너지효율관리사', clue: '6. 건물의 에너지 사용을 최적화하는 전문가', length: 8 },
+    { start: { row: 3, col: 1 }, direction: 'down', word: '스마트시티전문가', clue: '7. 도시의 문제 해결을 위해 기술을 적용하는 사람', length: 8 },
+    { start: { row: 5, col: 3 }, direction: 'down', word: 'VRAR콘텐츠크리에이터', clue: '8. 가상/증강 현실 콘텐츠를 만드는 사람', length: 11 },
+    { start: { row: 7, col: 5 }, direction: 'down', word: '자율주행차개발자', clue: '9. 스스로 운전하는 자동차를 만드는 사람', length: 8 },
+    { start: { row: 9, col: 7 }, direction: 'down', word: '보안전문가', clue: '10. 네트워크 및 시스템을 해킹으로부터 보호하는 사람', length: 5 },
 ];
 
 const ROWS = 20;
@@ -55,6 +55,9 @@ function createQuizBoard() {
     cluesDown.className = 'clues-list';
     cluesDown.innerHTML = '<h3>세로</h3>';
     
+    let acrossNumber = 1;
+    let downNumber = 1;
+
     // 퍼즐 단어 배치
     puzzle.forEach((item, index) => {
         let { start: { row, col }, direction, word, clue } = item;
@@ -65,12 +68,22 @@ function createQuizBoard() {
         // 단어 시작점에 번호 표시
         const numberSpan = document.createElement('span');
         numberSpan.className = 'clue-number';
-        numberSpan.textContent = index + 1;
+        
+        // 가로와 세로 번호를 구분하여 처리
+        if (direction === 'across') {
+            numberSpan.textContent = acrossNumber;
+            cluesAcross.innerHTML += `<p><b>${acrossNumber}.</b> ${clue}</p>`;
+            acrossNumber++;
+        } else {
+            numberSpan.textContent = downNumber;
+            cluesDown.innerHTML += `<p><b>${downNumber}.</b> ${clue}</p>`;
+            downNumber++;
+        }
+
         firstCell.appendChild(numberSpan);
 
         // 단어 셀 생성
         if (direction === 'across') {
-            cluesAcross.innerHTML += `<p><b>${index + 1}.</b> ${clue}</p>`;
             for (let i = 0; i < word.length; i++) {
                 const cell = document.querySelector(`.cell[data-row="${row}"][data-col="${col + i}"]`);
                 if (cell) {
@@ -80,7 +93,6 @@ function createQuizBoard() {
                 }
             }
         } else {
-            cluesDown.innerHTML += `<p><b>${index + 1}.</b> ${clue}</p>`;
             for (let i = 0; i < word.length; i++) {
                 const cell = document.querySelector(`.cell[data-row="${row + i}"][data-col="${col}"]`);
                 if (cell) {
