@@ -26,11 +26,12 @@ h1, h2 {
 
 #quiz-board {
     display: grid;
+    /* 20개의 열을 동일한 너비로 만듭니다. */
+    grid-template-columns: repeat(20, 30px);
     gap: 2px;
     margin: 20px 0;
     justify-content: center;
 }
-
 .cell {
     width: 30px;
     height: 30px;
@@ -106,4 +107,5 @@ h1, h2 {
     .cell input {
         font-size: 14px;
     }
+
 }
