@@ -1,5 +1,3 @@
-// script.js
-
 const puzzle = [
     // 가로 (Across)
     { start: { row: 0, col: 0 }, direction: 'across', word: '인공지능전문가', clue: '1. AI 기술을 개발하고 연구하는 사람', length: 7 },
@@ -30,7 +28,6 @@ const ROWS = 20;
 const COLS = 20;
 const board = Array(ROWS).fill(null).map(() => Array(COLS).fill(null));
 
-// 퀴즈 보드를 생성하고 문제를 배치하는 함수
 function createQuizBoard() {
     const quizBoard = document.getElementById('quiz-board');
     if (!quizBoard) {
@@ -38,14 +35,6 @@ function createQuizBoard() {
         return;
     }
     quizBoard.innerHTML = '';
-    
-    const cluesAcross = document.createElement('div');
-    cluesAcross.className = 'clues-list';
-    cluesAcross.innerHTML = '<h3>가로</h3>';
-
-    const cluesDown = document.createElement('div');
-    cluesDown.className = 'clues-list';
-    cluesDown.innerHTML = '<h3>세로</h3>';
     
     // 퀴즈 보드 격자 생성
     for (let i = 0; i < ROWS; i++) {
@@ -57,6 +46,14 @@ function createQuizBoard() {
             quizBoard.appendChild(cell);
         }
     }
+    
+    const cluesAcross = document.createElement('div');
+    cluesAcross.className = 'clues-list';
+    cluesAcross.innerHTML = '<h3>가로</h3>';
+
+    const cluesDown = document.createElement('div');
+    cluesDown.className = 'clues-list';
+    cluesDown.innerHTML = '<h3>세로</h3>';
     
     // 퍼즐 단어 배치
     puzzle.forEach((item, index) => {
@@ -79,7 +76,7 @@ function createQuizBoard() {
                 if (cell) {
                     cell.classList.add('active');
                     board[row][col + i] = word[i];
-                    cell.innerHTML = `<input type="text" maxlength="1" data-row="${row}" data-col="${col + i}">`;
+                    cell.innerHTML = `${cell.innerHTML}<input type="text" maxlength="1" data-row="${row}" data-col="${col + i}">`;
                 }
             }
         } else {
@@ -89,7 +86,7 @@ function createQuizBoard() {
                 if (cell) {
                     cell.classList.add('active');
                     board[row + i][col] = word[i];
-                    cell.innerHTML = `<input type="text" maxlength="1" data-row="${row + i}" data-col="${col}">`;
+                    cell.innerHTML = `${cell.innerHTML}<input type="text" maxlength="1" data-row="${row + i}" data-col="${col}">`;
                 }
             }
         }
