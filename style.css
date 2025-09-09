@@ -22,3 +22,24 @@
     color: #555;
     font-weight: bold;
 }
+/* style.css */
+
+/* ... (기존 CSS 코드 유지) ... */
+
+/* 보드 위 번호 색상 */
+.clue-number.across {
+    color: blue;
+}
+
+.clue-number.down {
+    color: red;
+}
+
+/* 문제 목록 글자 색상 */
+.across-clue {
+    color: blue;
+}
+
+.down-clue {
+    color: red;
+}
