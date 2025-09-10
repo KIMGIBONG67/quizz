@@ -1,3 +1,10 @@
+#quiz-board {
+    display: grid;
+    grid-template-columns: repeat(20, 30px);
+    gap: 2px;
+    margin: 20px 0;
+    justify-content: center;
+}
 .cell {
     width: 30px;
     height: 30px;
@@ -43,10 +50,5 @@
 .down-clue {
     color: red;
 }
-#quiz-board {
-    display: grid;
-    grid-template-columns: repeat(20, 30px);
-    gap: 2px;
-    margin: 20px 0;
-    justify-content: center;
-}
+
+
