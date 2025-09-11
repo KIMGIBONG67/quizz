@@ -1,402 +1,170 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>최신 직업 십자말풀이</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8;
-            color: #1f2937;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            min-height: 100vh;
-            padding: 20px;
-        }
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            max-width: 1200px;
-            width: 100%;
-            background-color: #fff;
-            padding: 2.5rem;
-            border-radius: 1rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
+document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('crossword-grid');
+    const messages = document.getElementById('messages');
+    const acrossCluesList = document.getElementById('across-clues');
+    const downCluesList = document.getElementById('down-clues');
+    const checkButton = document.getElementById('check-button');
 
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #111827;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
+    const boardSize = 12;
 
-        #crossword-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2rem;
-        }
+    const puzzles = {
+        across: [
+            { number: 1, clue: "데이터를 분석하여 비즈니스 의사결정을 돕는 사람", answer: "데이터분석가", row: 0, col: 0 },
+            { number: 2, clue: "책이나 잡지 등에 들어가는 그림을 그리는 사람", answer: "일러스트레이터", row: 2, col: 0 },
+            { number: 3, clue: "사람들의 심리적인 어려움을 해결해 주는 전문가", answer: "심리상담사", row: 4, col: 1 },
+            { number: 4, clue: "방송에서 뉴스를 읽고 전달하는 직업", answer: "아나운서", row: 6, col: 0 },
+            { number: 5, clue: "손님의 주문에 맞춰 커피를 만드는 사람", answer: "바리스타", row: 8, col: 2 },
+            { number: 6, clue: "미술관에서 작품을 해설하고 관리하는 직업", answer: "큐레이터", row: 10, col: 0 },
+            { number: 7, clue: "아픈 동물을 치료해 주는 의사", answer: "수의사", row: 11, col: 5 },
+            { number: 8, clue: "개인이나 회사의 수입과 지출을 기록하고 관리하는 사람", answer: "회계사", row: 9, col: 7 },
+            { number: 9, clue: "국가나 지방 공공 기관에서 일하는 사람", answer: "공무원", row: 7, col: 2 },
+            { number: 10, clue: "외국어로 된 글을 다른 언어로 바꾸는 사람", answer: "번역가", row: 5, col: 7 }
+        ],
+        down: [
+            { number: 1, clue: "디지털 기기를 활용해 자유롭게 일하는 사람", answer: "디지털노마드", row: 0, col: 0 },
+            { number: 2, clue: "어린 아이들을 가르치고 돌보는 선생님", answer: "유치원교사", row: 1, col: 4 },
+            { number: 3, clue: "직업으로 게임을 하는 사람", answer: "프로게이머", row: 2, col: 7 },
+            { number: 4, clue: "미술을 가르치는 선생님", answer: "회화선생님", row: 4, col: 1 },
+            { number: 5, clue: "만화나 애니메이션 캐릭터를 만드는 사람", answer: "애니메이터", row: 3, col: 9 },
+            { number: 6, clue: "불이 난 곳에서 사람을 구하는 사람", answer: "소방관", row: 6, col: 4 },
+            { number: 7, clue: "맛있는 음식을 만드는 사람", answer: "요리사", row: 8, col: 2 },
+            { number: 8, clue: "배를 운전하여 바다를 항해하는 사람", answer: "선장", row: 1, col: 10 },
+            { number: 9, clue: "책이나 글을 쓰는 사람", answer: "작가", row: 7, col: 7 },
+            { number: 10, clue: "법률 전문가로, 법정에서 변론을 맡는다", answer: "변호사", row: 5, col: 11 }
+        ]
+    };
+    
+    const boardData = {};
 
-        #crossword-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            grid-gap: 2px;
-            margin: 0 auto;
-            max-width: 100%;
-            aspect-ratio: 1 / 1;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            border-radius: 0.5rem;
-            overflow: hidden;
-        }
-
-        .cell {
-            width: 100%;
-            position: relative;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .cell::before {
-            content: '';
-            display: block;
-            padding-top: 100%;
-        }
-
-        .cell.filled {
-            background-color: #fff;
-        }
-
-        .cell input {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            font-size: 1.2em;
-            text-transform: uppercase;
-            border: none;
-            background: transparent;
-            outline: none;
-            box-sizing: border-box;
-            padding: 0;
-        }
-
-        .cell .number {
-            position: absolute;
-            font-size: 0.7em;
-            font-weight: bold;
-            line-height: 1;
-        }
-
-        .cell .number.across {
-            color: #007bff; /* 파란색 */
-            top: 2px;
-            left: 2px;
-        }
-
-        .cell .number.down {
-            color: #dc3545; /* 빨간색 */
-            top: 2px;
-            right: 2px;
-        }
-
-        .cell.correct input {
-            color: green;
-        }
-
-        .cell.incorrect input {
-            color: red;
-        }
-
-        #clues-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            width: 100%;
-        }
-
-        .clues-section {
-            background-color: #f9fafb;
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-        }
-
-        .clues-section h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #374151;
-        }
-
-        .clues-section ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .clues-section li {
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
-            line-height: 1.5;
-            color: #4b5563;
-        }
-
-        #button-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 1rem;
-        }
-
-        #check-button {
-            padding: 0.75rem 2rem;
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: #fff;
-            background-color: #4f46e5;
-            border: none;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.1s ease;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-
-        #check-button:hover {
-            background-color: #4338ca;
-            transform: translateY(-2px);
-        }
-
-        #messages {
-            text-align: center;
-            margin-top: 1rem;
-            font-size: 1.25rem;
-            font-weight: bold;
-        }
-        
-        @media (min-width: 768px) {
-            .container {
-                flex-direction: row;
+    function setupBoard() {
+        puzzles.across.forEach(p => {
+            for (let i = 0; i < p.answer.length; i++) {
+                const key = `${p.row}-${p.col + i}`;
+                if (!boardData[key]) boardData[key] = { across: null, down: null, letter: p.answer[i] };
+                boardData[key].across = { number: p.number, clue: p.clue, answer: p.answer };
             }
-            #crossword-container {
-                flex: 2;
-                max-width: 60%;
-            }
-            #clues-container {
-                flex: 1;
-            }
-        }
-    </style>
-</head>
-<body class="bg-gray-100 flex items-center justify-center p-4">
-    <div class="container bg-white rounded-lg shadow-xl p-8">
-        <h1 class="text-3xl md:text-4xl font-extrabold text-gray-800 text-center mb-6">최신 직업 십자말풀이</h1>
-        <div id="crossword-container" class="flex flex-col md:flex-row gap-8">
-            <div id="crossword-grid" class="flex-grow w-full"></div>
-            <div id="clues-container" class="flex flex-col gap-4 w-full">
-                <div class="clues-section bg-gray-50 rounded-lg p-6">
-                    <h2 class="text-xl font-bold text-blue-600 mb-4">가로 문제</h2>
-                    <ul id="across-clues" class="list-disc pl-5 space-y-2 text-gray-700"></ul>
-                </div>
-                <div class="clues-section bg-gray-50 rounded-lg p-6">
-                    <h2 class="text-xl font-bold text-red-600 mb-4">세로 문제</h2>
-                    <ul id="down-clues" class="list-disc pl-5 space-y-2 text-gray-700"></ul>
-                </div>
-            </div>
-        </div>
-        <div id="button-container" class="mt-6">
-            <button id="check-button" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105">정답 확인</button>
-        </div>
-        <div id="messages" class="mt-4 text-center text-xl font-semibold"></div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const grid = document.getElementById('crossword-grid');
-            const messages = document.getElementById('messages');
-            const acrossCluesList = document.getElementById('across-clues');
-            const downCluesList = document.getElementById('down-clues');
-            const checkButton = document.getElementById('check-button');
-
-            const boardSize = 12;
-
-            const puzzles = {
-                across: [
-                    { number: 1, clue: "인터넷과 디지털 기기를 활용해 장소에 구애받지 않고 일하는 사람. 5자", answer: "디지털노마드", row: 0, col: 0 },
-                    { number: 2, clue: "인공지능(AI) 관련 소프트웨어, 모델, 알고리즘을 개발하는 전문가. 7자", answer: "인공지능개발자", row: 2, col: 0 },
-                    { number: 3, clue: "박물관, 유적지, 문화재, 전통 행사 등에서 방문객에게 문화와 역사에 대해 설명하고 안내하는 전문가. 5자", answer: "문화해설자", row: 4, col: 0 },
-                    { number: 4, clue: "기업이나 기관에서 생산, 공사, 운영 등에 필요한 자재를 계획, 구매, 보관, 배분, 재고 관리하는 업무. 4자", answer: "자재관리", row: 6, col: 0 },
-                    { number: 5, clue: "손님의 주문에 맞춰 커피를 만드는 사람. 4자", answer: "바리스타", row: 8, col: 1 },
-                    { number: 6, clue: "자동차, 항공기 등 교통수단의 안전성을 테스트하기 위해 사용하는 인체 모형. 4자", answer: "충돌더미" , row: 10, col: 0 },
-                    { number: 7, clue: "자신의 블로그를 운영하며 콘텐츠를 제작, 게시하고 관리하는 사람. 3자", answer: "블로거", row: 11, col: 5 },
-                    { number: 8, clue: "동물원, 수족관, 농장 등에서 동물을 돌보고 관리하는 전문가. 3자", answer: "사육사", row: 9, col: 7 },
-                    { number: 9, clue: "국가나 지방 공공 기관에서 일하는 사람. 3자", answer: "공무원", row: 7, col: 2 },
-                    { number: 10, clue: "기관, 단체, 학교, 재단 등의 이사회나 조직을 대표하고 총괄하는 최고 책임자. 3자", answer: "이사장", row: 5, col: 7 }
-                ],
-                down: [
-                    { number: 1, clue: "시각, 제품, 공간, UI/UX 등 다양한 분야에서 디자인을 기획하고 실행하는 전문가. 6자", answer: "디자인전문가", row: 0, col: 0 },
-                    { number: 2, clue: "웹사이트나 웹 애플리케이션을 설계, 개발, 유지보수하는 전문가. 4자", answer: "웹개발자", row: 1, col: 4 },
-                    { number: 3, clue: "직업으로 게임을 하는 사람. 5자", answer: "프로게이머", row: 2, col: 7 },
-                    { number: 4, clue: "꽃과 식물을 재배하고 관리하며, 판매나 전시를 위해 준비하는 전문가. 5자", answer: "화훼재배사", row: 4, col: 1 },
-                    { number: 5, clue: "기업이나 기관의 사업장(오피스, 공장, 매장 등) 운영과 시설, 자원, 인력을 효율적으로 관리하는 업무. 5자", answer: "사업장관리", row: 3, col: 9 },
-                    { number: 6, clue: "학교나 교육기관에서 학생을 가르치고 교육활동을 수행하는 전문가. 2자", answer: "교원", row: 6, col: 4 },
-                    { number: 7, clue: "주류를 조제하고, 고객에게 음료를 제공하며, 술집·바·레스토랑에서 서비스하는 전문가. 3자", answer: "바텐더", row: 8, col: 2 },
-                    { number: 8, clue: "컴퓨터 프로그램을 작성하고, 소프트웨어나 애플리케이션 기능을 구현하는 전문가. 2자", answer: "코더", row: 1, col: 10 },
-                    { number: 9, clue: "음식의 조리, 메뉴 개발, 식재료 관리 등을 담당하며, 레스토랑이나 식당에서 요리를 만드는 전문가. 3자", answer: "요리사", row: 7, col: 7 },
-                    { number: 10, clue: "기계, 자동차, 항공기, 산업 장비 등의 상태를 점검하고 수리·유지보수하는 전문가. 3자", answer: "정비사", row: 5, col: 11 }
-                ]
-            };
-            
-            const boardData = {};
-
-            function setupBoard() {
-                puzzles.across.forEach(p => {
-                    for (let i = 0; i < p.answer.length; i++) {
-                        const key = `${p.row}-${p.col + i}`;
-                        if (!boardData[key]) boardData[key] = { across: null, down: null, letter: p.answer[i] };
-                        boardData[key].across = { number: p.number, clue: p.clue, answer: p.answer };
-                    }
-                });
-
-                puzzles.down.forEach(p => {
-                    for (let i = 0; i < p.answer.length; i++) {
-                        const key = `${p.row + i}-${p.col}`;
-                        if (!boardData[key]) boardData[key] = { across: null, down: null, letter: p.answer[i] };
-                        boardData[key].down = { number: p.number, clue: p.clue, answer: p.answer };
-                    }
-                });
-            }
-
-            function createBoard() {
-                grid.innerHTML = '';
-                for (let row = 0; row < boardSize; row++) {
-                    for (let col = 0; col < boardSize; col++) {
-                        const key = `${row}-${col}`;
-                        const cell = document.createElement('div');
-                        cell.classList.add('cell');
-
-                        // 5행 6열과 6행 5열은 의도적으로 빈칸으로 만듭니다.
-                        if ((row === 5 && col === 6) || (row === 6 && col === 5)) {
-                            // do nothing
-                        } else if (boardData[key]) {
-                            cell.classList.add('filled');
-                            const input = document.createElement('input');
-                            input.setAttribute('type', 'text');
-                            input.setAttribute('maxlength', '1');
-                            input.dataset.row = row;
-                            input.dataset.col = col;
-                            cell.appendChild(input);
-
-                            const acrossClue = puzzles.across.find(p => p.row === row && p.col === col);
-                            const downClue = puzzles.down.find(p => p.row === row && p.col === col);
-                            
-                            if (acrossClue) {
-                                const acrossNumberSpan = document.createElement('span');
-                                acrossNumberSpan.classList.add('number', 'across');
-                                acrossNumberSpan.textContent = acrossClue.number;
-                                cell.appendChild(acrossNumberSpan);
-                            }
-
-                            if (downClue) {
-                                const downNumberSpan = document.createElement('span');
-                                downNumberSpan.classList.add('number', 'down');
-                                downNumberSpan.textContent = downClue.number;
-                                cell.appendChild(downNumberSpan);
-                            }
-                        }
-                        grid.appendChild(cell);
-                    }
-                }
-            }
-
-            function displayClues() {
-                acrossCluesList.innerHTML = '';
-                downCluesList.innerHTML = '';
-
-                puzzles.across.forEach(p => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `<span class="across-number">${p.number}.</span> ${p.clue}`;
-                    acrossCluesList.appendChild(li);
-                });
-
-                puzzles.down.forEach(p => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `<span class="down-number">${p.number}.</span> ${p.clue}`;
-                    downCluesList.appendChild(li);
-                });
-            }
-
-            function checkAnswers() {
-                let allCorrect = true;
-                
-                document.querySelectorAll('.cell.filled input').forEach(input => {
-                    input.parentElement.classList.remove('correct', 'incorrect');
-                });
-
-                const checkPuzzle = (puzzleType) => {
-                    puzzles[puzzleType].forEach(p => {
-                        let userSolution = '';
-                        for (let i = 0; i < p.answer.length; i++) {
-                            const row = (puzzleType === 'across') ? p.row : p.row + i;
-                            const col = (puzzleType === 'across') ? p.col + i : p.col;
-                            const input = document.querySelector(`[data-row='${row}'][data-col='${col}']`);
-                            userSolution += input ? input.value : '';
-                        }
-
-                        if (userSolution.toLowerCase() !== p.answer.toLowerCase()) {
-                            allCorrect = false;
-                            for (let i = 0; i < p.answer.length; i++) {
-                                const row = (puzzleType === 'across') ? p.row : p.row + i;
-                                const col = (puzzleType === 'across') ? p.col + i : p.col;
-                                const input = document.querySelector(`[data-row='${row}'][data-col='${col}']`);
-                                if (input && input.value.toLowerCase() !== p.answer[i].toLowerCase()) {
-                                    input.parentElement.classList.add('incorrect');
-                                }
-                            }
-                        } else {
-                            for (let i = 0; i < p.answer.length; i++) {
-                                const row = (puzzleType === 'across') ? p.row : p.row + i;
-                                const col = (puzzleType === 'across') ? p.col + i : p.col;
-                                const input = document.querySelector(`[data-row='${row}'][data-col='${col}']`);
-                                if (input) {
-                                    input.parentElement.classList.add('correct');
-                                }
-                            }
-                        }
-                    });
-                };
-
-                checkPuzzle('across');
-                checkPuzzle('down');
-
-                if (allCorrect) {
-                    messages.textContent = "🎉 다 맞추셨습니다. 축하합니다! 🎉";
-                    messages.style.color = "green";
-                } else {
-                    messages.textContent = "🤔 틀린 곳이 있습니다. 다시 풀어보세요.";
-                    messages.style.color = "red";
-                }
-            }
-
-            setupBoard();
-            createBoard();
-            displayClues();
-            checkButton.addEventListener('click', checkAnswers);
         });
-    </script>
-</body>
-</html>
+
+        puzzles.down.forEach(p => {
+            for (let i = 0; i < p.answer.length; i++) {
+                const key = `${p.row + i}-${p.col}`;
+                if (!boardData[key]) boardData[key] = { across: null, down: null, letter: p.answer[i] };
+                boardData[key].down = { number: p.number, clue: p.clue, answer: p.answer };
+            }
+        });
+    }
+
+    function createBoard() {
+        grid.innerHTML = '';
+        for (let row = 0; row < boardSize; row++) {
+            for (let col = 0; col < boardSize; col++) {
+                const key = `${row}-${col}`;
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+
+                if (boardData[key]) {
+                    cell.classList.add('filled');
+                    const input = document.createElement('input');
+                    input.setAttribute('type', 'text');
+                    input.setAttribute('maxlength', '1');
+                    input.dataset.row = row;
+                    input.dataset.col = col;
+                    cell.appendChild(input);
+
+                    const acrossClue = puzzles.across.find(p => p.row === row && p.col === col);
+                    const downClue = puzzles.down.find(p => p.row === row && p.col === col);
+                    
+                    if (acrossClue) {
+                        const acrossNumberSpan = document.createElement('span');
+                        acrossNumberSpan.classList.add('number', 'across');
+                        acrossNumberSpan.textContent = acrossClue.number;
+                        cell.appendChild(acrossNumberSpan);
+                    }
+
+                    if (downClue) {
+                        const downNumberSpan = document.createElement('span');
+                        downNumberSpan.classList.add('number', 'down');
+                        downNumberSpan.textContent = downClue.number;
+                        cell.appendChild(downNumberSpan);
+                    }
+                }
+                grid.appendChild(cell);
+            }
+        }
+    }
+
+    function displayClues() {
+        acrossCluesList.innerHTML = '';
+        downCluesList.innerHTML = '';
+
+        puzzles.across.forEach(p => {
+            const li = document.createElement('li');
+            li.innerHTML = `<span class="across-number">${p.number}.</span> ${p.clue}`;
+            acrossCluesList.appendChild(li);
+        });
+
+        puzzles.down.forEach(p => {
+            const li = document.createElement('li');
+            li.innerHTML = `<span class="down-number">${p.number}.</span> ${p.clue}`;
+            downCluesList.appendChild(li);
+        });
+    }
+
+    function checkAnswers() {
+        let allCorrect = true;
+        
+        document.querySelectorAll('.cell.filled input').forEach(input => {
+            input.parentElement.classList.remove('correct', 'incorrect');
+        });
+
+        const checkPuzzle = (puzzleType) => {
+            puzzles[puzzleType].forEach(p => {
+                let userSolution = '';
+                for (let i = 0; i < p.answer.length; i++) {
+                    const row = (puzzleType === 'across') ? p.row : p.row + i;
+                    const col = (puzzleType === 'across') ? p.col + i : p.col;
+                    const input = document.querySelector(`[data-row='${row}'][data-col='${col}']`);
+                    userSolution += input ? input.value.toUpperCase() : '';
+                }
+
+                if (userSolution !== p.answer.toUpperCase()) {
+                    allCorrect = false;
+                    for (let i = 0; i < p.answer.length; i++) {
+                        const row = (puzzleType === 'across') ? p.row : p.row + i;
+                        const col = (puzzleType === 'across') ? p.col + i : p.col;
+                        const input = document.querySelector(`[data-row='${row}'][data-col='${col}']`);
+                        if (input && input.value.toUpperCase() !== p.answer[i].toUpperCase()) {
+                            input.parentElement.classList.add('incorrect');
+                        }
+                    }
+                } else {
+                    for (let i = 0; i < p.answer.length; i++) {
+                        const row = (puzzleType === 'across') ? p.row : p.row + i;
+                        const col = (puzzleType === 'across') ? p.col + i : p.col;
+                        const input = document.querySelector(`[data-row='${row}'][data-col='${col}']`);
+                        if (input) {
+                            input.parentElement.classList.add('correct');
+                        }
+                    }
+                }
+            });
+        };
+
+        checkPuzzle('across');
+        checkPuzzle('down');
+
+        if (allCorrect) {
+            messages.textContent = "🎉 다 맞추셨습니다. 축하합니다! 🎉";
+            messages.style.color = "green";
+        } else {
+            messages.textContent = "🤔 틀린 곳이 있습니다. 다시 풀어보세요.";
+            messages.style.color = "red";
+        }
+    }
+
+    setupBoard();
+    createBoard();
+    displayClues();
+    checkButton.addEventListener('click', checkAnswers);
+});
