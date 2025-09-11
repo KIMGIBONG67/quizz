@@ -9,25 +9,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const puzzles = {
         across: [
-            { number: 1, clue: "가상현실 콘텐츠를 제작하는 전문가", answer: "VR개발자", row: 0, col: 0 },
-            { number: 2, clue: "인공지능 모델을 훈련시키고 개선하는 전문가", answer: "AI엔지니어", row: 2, col: 1 },
-            { number: 3, clue: "로봇을 설계하고 제어하는 기술자", answer: "로봇공학자", row: 4, col: 2 },
-            { number: 4, clue: "사물 인터넷 기기를 개발하는 전문가", answer: "IoT개발자", row: 6, col: 0 },
-            { number: 5, clue: "빅데이터를 분석하여 비즈니스 통찰을 제공하는 전문가", answer: "데이터사이언티스트", row: 8, col: 2 },
-            { number: 6, clue: "유튜브, 틱톡 등에서 콘텐츠를 제작하는 사람", answer: "콘텐츠크리에이터", row: 10, col: 0 },
-            { number: 7, clue: "드론을 조종하여 촬영, 배송 등 업무를 수행", answer: "드론조종사", row: 11, col: 5 }
+            { number: 1, clue: "웹사이트의 디자인과 기능을 만드는 전문가", answer: "웹디자이너", row: 0, col: 0 },
+            { number: 2, clue: "데이터를 분석하여 기업의 의사결정을 돕는 사람", answer: "데이터분석가", row: 2, col: 1 },
+            { number: 3, clue: "사람들의 심리적인 어려움을 해결해 주는 전문가", answer: "심리상담사", row: 4, col: 0 },
+            { number: 4, clue: "손님의 주문에 맞춰 커피를 만드는 사람", answer: "바리스타", row: 6, col: 2 },
+            { number: 5, clue: "아픈 동물을 치료해 주는 의사", answer: "수의사", row: 8, col: 0 },
+            { number: 6, clue: "직업으로 게임을 하는 사람", answer: "프로게이머", row: 10, col: 1 },
+            { number: 7, clue: "고객의 돈을 관리하고 투자하는 전문가", answer: "펀드매니저", row: 11, col: 5 },
+            { number: 8, clue: "만화나 애니메이션 캐릭터를 만드는 사람", answer: "애니메이터", row: 9, col: 0 },
+            { number: 9, clue: "게임이나 영화에 등장하는 캐릭터를 디자인하는 전문가", answer: "캐릭터디자이너", row: 5, col: 7 },
+            { number: 10, clue: "미술관에서 작품을 해설하고 관리하는 직업", answer: "큐레이터", row: 3, col: 2 }
         ],
         down: [
-            { number: 1, clue: "클라우드 시스템을 구축하고 관리하는 전문가", answer: "클라우드엔지니어", row: 0, col: 0 },
-            { number: 2, clue: "3D 모델링을 전문적으로 하는 사람", answer: "3D모델러", row: 2, col: 4 },
-            { number: 3, clue: "스마트팜 기술을 연구하는 전문가", answer: "스마트팜전문가", row: 4, col: 2 },
-            { number: 4, clue: "개인 맞춤형 영양 컨설팅을 제공하는 사람", answer: "맞춤형영양사", row: 6, col: 1 },
-            { number: 5, clue: "자율주행 자동차 기술을 개발하는 전문가", answer: "자율주행차개발자", row: 8, col: 8 },
-            { number: 6, clue: "유전자를 분석하고 질병을 예방하는 전문가", answer: "유전체분석가", row: 10, col: 0 },
-            { number: 7, clue: "블록체인 기술을 활용한 서비스를 만드는 전문가", answer: "블록체인개발자", row: 1, col: 10 }
+            { number: 1, clue: "개인이나 회사의 수입과 지출을 기록하고 관리하는 사람", answer: "회계사", row: 0, col: 0 },
+            { number: 2, clue: "국가나 지방 공공 기관에서 일하는 사람", answer: "공무원", row: 1, col: 6 },
+            { number: 3, clue: "책이나 잡지 등에 들어가는 그림을 그리는 사람", answer: "일러스트레이터", row: 2, col: 1 },
+            { number: 4, clue: "어린 아이들을 가르치고 돌보는 선생님", answer: "유치원교사", row: 3, col: 4 },
+            { number: 5, clue: "꽃을 다듬고 장식하는 전문가", answer: "플로리스트", row: 4, col: 2 },
+            { number: 6, clue: "외국어로 된 글을 다른 언어로 바꾸는 사람", answer: "번역가", row: 6, col: 8 },
+            { number: 7, clue: "방송 프로그램의 제작을 총괄하는 사람", answer: "피디", row: 8, col: 9 },
+            { number: 8, clue: "방송에서 물건을 판매하는 사람", answer: "쇼핑호스트", row: 0, col: 10 },
+            { number: 9, clue: "미술관 등에서 작품을 설명해주는 안내인", answer: "도슨트", row: 10, col: 1 },
+            { number: 10, clue: "악보를 만들고 음악을 창작하는 사람", answer: "작곡가", row: 5, col: 11 }
         ]
     };
-
+    
     const boardData = {};
 
     function setupBoard() {
@@ -68,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     const acrossClue = puzzles.across.find(p => p.row === row && p.col === col);
                     const downClue = puzzles.down.find(p => p.row === row && p.col === col);
                     
-                    // 가로 문제 번호가 있으면 span 생성
                     if (acrossClue) {
                         const acrossNumberSpan = document.createElement('span');
                         acrossNumberSpan.classList.add('number', 'across');
@@ -76,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         cell.appendChild(acrossNumberSpan);
                     }
 
-                    // 세로 문제 번호가 있으면 span 생성
                     if (downClue) {
                         const downNumberSpan = document.createElement('span');
                         downNumberSpan.classList.add('number', 'down');
