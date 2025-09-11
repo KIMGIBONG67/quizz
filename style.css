@@ -26,11 +26,11 @@ h1, h2 {
 
 #crossword-grid {
     display: grid;
-    grid-template-columns: repeat(12, 1fr); /* 12x12 보드로 수정 */
+    grid-template-columns: repeat(12, 1fr);
     grid-gap: 2px;
     margin: 20px auto;
     max-width: 100%;
-    aspect-ratio: 1 / 1; /* 보드 비율을 1:1로 유지 */
+    aspect-ratio: 1 / 1;
 }
 
 .cell {
@@ -47,7 +47,7 @@ h1, h2 {
 .cell::before {
     content: '';
     display: block;
-    padding-top: 100%; /* 셀을 정사각형으로 유지 */
+    padding-top: 100%;
 }
 
 .cell.filled {
@@ -72,18 +72,21 @@ h1, h2 {
 
 .cell .number {
     position: absolute;
-    top: 2px;
-    left: 2px;
     font-size: 0.7em;
     font-weight: bold;
+    line-height: 1; /* 줄 높이를 1로 설정하여 겹침 방지 */
 }
 
 .cell .number.across {
     color: #007bff; /* 파란색 */
+    top: 2px;
+    left: 2px;
 }
 
 .cell .number.down {
     color: #dc3545; /* 빨간색 */
+    top: 2px;
+    right: 2px;
 }
 
 .cell.correct input {
