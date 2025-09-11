@@ -3,24 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>가로세로 낱말퀴즈</title>
+    <title>서일대학교 -함귀분 교수 제작- 십자말풀이</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="container">
-        <h1>가로세로 낱말퀴즈</h1>
-        <div id="quiz-board-container">
-            <div id="quiz-board"></div>
-        </div>
+        <h1>서일대학교 -함귀분 교수 제작-</h1>
+        <h2>최신 직업 십자말풀이</h2>
         
-        <div class="buttons">
-            <button onclick="window.checkAnswers()">정답 확인</button>
-            <button onclick="window.resetQuiz()">다시 풀기</button>
-        </div>
+        <div id="crossword-grid"></div>
         
-        <p id="message"></p>
+        <div id="messages"></div>
 
+        <div class="clue-section">
+            <div class="clue-list">
+                <h3>가로 문제</h3>
+                <ul id="across-clues"></ul>
+            </div>
+            <div class="clue-list">
+                <h3>세로 문제</h3>
+                <ul id="down-clues"></ul>
+            </div>
+        </div>
+        <button id="check-button">정답 확인</button>
     </div>
 
     <script src="script.js"></script>
