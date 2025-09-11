@@ -289,7 +289,10 @@
                         const cell = document.createElement('div');
                         cell.classList.add('cell');
 
-                        if (boardData[key]) {
+                        // 5행 6열과 6행 5열은 의도적으로 빈칸으로 만듭니다.
+                        if ((row === 5 && col === 6) || (row === 6 && col === 5)) {
+                            // do nothing
+                        } else if (boardData[key]) {
                             cell.classList.add('filled');
                             const input = document.createElement('input');
                             input.setAttribute('type', 'text');
