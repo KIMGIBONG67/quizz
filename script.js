@@ -255,7 +255,7 @@
                     { number: 5, clue: "기업이나 기관의 사업장(오피스, 공장, 매장 등) 운영과 시설, 자원, 인력을 효율적으로 관리하는 업무. 5자", answer: "사업장관리", row: 3, col: 9 },
                     { number: 6, clue: "학교나 교육기관에서 학생을 가르치고 교육활동을 수행하는 전문가. 2자", answer: "교원", row: 6, col: 4 },
                     { number: 7, clue: "주류를 조제하고, 고객에게 음료를 제공하며, 술집·바·레스토랑에서 서비스하는 전문가. 3자", answer: "바텐더", row: 8, col: 2 },
-                    { number: 8, clue: "컴퓨터 프로그램을 작성하고, 소프트웨어나 애플리케이션 기능을 구현하는 전문가. 2자", answer: "코더", row: 1, col: 10 },
+                    { number: 8, clue: "컴퓨터 프로그램을 작성하고, 소프트웨어나 애플리케이션 기능을 구현하는 전문가 2자", answer: "코더", row: 1, col: 10 },
                     { number: 9, clue: "음식의 조리, 메뉴 개발, 식재료 관리 등을 담당하며, 레스토랑이나 식당에서 요리를 만드는 전문가. 3자", answer: "요리사", row: 7, col: 7 },
                     { number: 10, clue: "기계, 자동차, 항공기, 산업 장비 등의 상태를 점검하고 수리·유지보수하는 전문가. 3자", answer: "정비사", row: 5, col: 11 }
                 ]
@@ -354,16 +354,16 @@
                             const row = (puzzleType === 'across') ? p.row : p.row + i;
                             const col = (puzzleType === 'across') ? p.col + i : p.col;
                             const input = document.querySelector(`[data-row='${row}'][data-col='${col}']`);
-                            userSolution += input ? input.value : '';
+                            userSolution += input ? input.value.toUpperCase() : '';
                         }
 
-                        if (userSolution.toLowerCase() !== p.answer.toLowerCase()) {
+                        if (userSolution !== p.answer.toUpperCase()) {
                             allCorrect = false;
                             for (let i = 0; i < p.answer.length; i++) {
                                 const row = (puzzleType === 'across') ? p.row : p.row + i;
                                 const col = (puzzleType === 'across') ? p.col + i : p.col;
                                 const input = document.querySelector(`[data-row='${row}'][data-col='${col}']`);
-                                if (input && input.value.toLowerCase() !== p.answer[i].toLowerCase()) {
+                                if (input && input.value.toUpperCase() !== p.answer[i].toUpperCase()) {
                                     input.parentElement.classList.add('incorrect');
                                 }
                             }
