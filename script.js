@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         across: [
             { number: 1, clue: "인터넷과 디지털 기기를 활용해 장소에 구애받지 않고 일하는 사람. 5자, answer: "디지털노마드", row: 0, col: 0 },
             { number: 2, clue: "인공지능(AI) 관련 소프트웨어, 모델, 알고리즘을 개발하는 전문가. 7자", answer: "인공지능개발자", row: 2, col: 0 },
-            { number: 3, clue: "박물관, 유적지, 문화재, 전통 행사 등에서 방문객에게 문화와 역사에 대해 설명하고 안내하는 전문가. 5자", answer: "문화해설자", row: 1, col: 5 },
+            { number: 3, clue: "박물관, 유적지, 문화재, 전통 행사 등에서 방문객에게 문화와 역사에 대해 설명하고 안내하는 전문가. 5자", answer: "문화해설자", row: 4, col: 1 },
             { number: 4, clue: "기업이나 기관에서 생산, 공사, 운영 등에 필요한 자재를 계획, 구매, 보관, 배분, 재고 관리하는 업무. 4자", answer: "자재관리", row: 6, col: 0 },
             { number: 5, clue: "손님의 주문에 맞춰 커피를 만드는 사람. 4자", answer: "바리스타", row: 8, col: 2 },
             { number: 6, clue: "자동차, 항공기 등 교통수단의 안전성을 테스트하기 위해 사용하는 인체 모형. 4자", answer: "충돌더미" , row: 10, col: 0 },
@@ -167,3 +167,4 @@ document.addEventListener('DOMContentLoaded', () => {
     displayClues();
     checkButton.addEventListener('click', checkAnswers);
 });
+
