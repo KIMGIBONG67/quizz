@@ -5,10 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const downCluesList = document.getElementById('down-clues');
     const checkButton = document.getElementById('check-button');
 
-    // 보드 크기를 12로 축소
     const boardSize = 12;
 
-    // 최신 직업 관련 퀴즈 데이터 (보드 크기에 맞춰 재구성)
     const puzzles = {
         across: [
             { number: 1, clue: "가상현실 콘텐츠를 제작하는 전문가", answer: "VR개발자", row: 0, col: 0 },
@@ -30,11 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
     };
 
-    // 보드 데이터 구조를 더 효율적으로 변경
     const boardData = {};
 
     function setupBoard() {
-        // 퍼즐 보드 데이터 채우기
         puzzles.across.forEach(p => {
             for (let i = 0; i < p.answer.length; i++) {
                 const key = `${p.row}-${p.col + i}`;
@@ -69,27 +65,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     input.dataset.col = col;
                     cell.appendChild(input);
 
-                    const numberSpan = document.createElement('span');
-                    numberSpan.classList.add('number');
-
-                    let numberText = '';
-                    let acrossNumber = boardData[key].across ? boardData[key].across.number : null;
-                    let downNumber = boardData[key].down ? boardData[key].down.number : null;
+                    const acrossClue = puzzles.across.find(p => p.row === row && p.col === col);
+                    const downClue = puzzles.down.find(p => p.row === row && p.col === col);
                     
-                    if (acrossNumber && downNumber) {
-                         numberText = `${acrossNumber}/${downNumber}`;
-                         numberSpan.classList.add('across', 'down');
-                    } else if (acrossNumber) {
-                        numberText = `${acrossNumber}`;
-                        numberSpan.classList.add('across');
-                    } else if (downNumber) {
-                        numberText = `${downNumber}`;
-                        numberSpan.classList.add('down');
+                    // 가로 문제 번호가 있으면 span 생성
+                    if (acrossClue) {
+                        const acrossNumberSpan = document.createElement('span');
+                        acrossNumberSpan.classList.add('number', 'across');
+                        acrossNumberSpan.textContent = acrossClue.number;
+                        cell.appendChild(acrossNumberSpan);
                     }
 
-                    numberSpan.textContent = numberText;
-                    if (numberText) {
-                         cell.appendChild(numberSpan);
+                    // 세로 문제 번호가 있으면 span 생성
+                    if (downClue) {
+                        const downNumberSpan = document.createElement('span');
+                        downNumberSpan.classList.add('number', 'down');
+                        downNumberSpan.textContent = downClue.number;
+                        cell.appendChild(downNumberSpan);
                     }
                 }
                 grid.appendChild(cell);
