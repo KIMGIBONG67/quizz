@@ -9,22 +9,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const puzzles = {
         across: [
-            { number: 1, clue: "손님에게 맛있는 음식을 만들어 제공하는 사람", answer: "요리사", row: 0, col: 0 },
-            { number: 2, clue: "꽃을 다듬고 장식하는 전문가", answer: "플로리스트", row: 2, col: 1 },
+            { number: 1, clue: "가게에서 물건을 팔거나 돈을 받는 사람", answer: "점원", row: 0, col: 0 },
+            { number: 2, clue: "손님에게 맛있는 음식을 만들어 제공하는 사람", answer: "요리사", row: 2, col: 1 },
             { number: 3, clue: "개인이나 회사의 수입과 지출을 기록하고 관리하는 사람", answer: "회계사", row: 4, col: 0 },
-            { number: 4, clue: "미술관에서 작품을 해설하고 관리하는 직업", answer: "큐레이터", row: 6, col: 2 },
-            { number: 5, clue: "국가나 지방 공공 기관에서 일하는 사람", answer: "공무원", row: 8, col: 0 },
-            { number: 6, clue: "외국어로 된 글을 다른 언어로 바꾸는 사람", answer: "번역가", row: 10, col: 1 },
+            { number: 4, clue: "아픈 동물을 치료해 주는 의사", answer: "수의사", row: 6, col: 2 },
+            { number: 5, clue: "방송 프로그램의 제작을 총괄하는 사람", answer: "피디", row: 8, col: 0 },
+            { number: 6, clue: "배의 운전과 운항을 책임지는 사람", answer: "선장", row: 10, col: 1 },
             { number: 7, clue: "책이나 글을 쓰는 사람", answer: "작가", row: 11, col: 5 }
         ],
         down: [
-            { number: 1, clue: "요가를 가르치는 전문가", answer: "요가강사", row: 0, col: 0 },
-            { number: 2, clue: "배의 운전과 운항을 책임지는 사람", answer: "선장", row: 2, col: 1 },
-            { number: 3, clue: "손님의 주문에 맞춰 커피를 만드는 사람", answer: "바리스타", row: 4, col: 0 },
-            { number: 4, clue: "아픈 동물을 치료해 주는 의사", answer: "수의사", row: 6, col: 2 },
+            { number: 1, clue: "은행에서 고객의 업무를 돕는 사람", answer: "은행원", row: 0, col: 0 },
+            { number: 2, clue: "요가를 가르치는 전문가", answer: "요가강사", row: 2, col: 1 },
+            { number: 3, clue: "가게에서 물건을 팔거나 돈을 받는 사람", answer: "점원", row: 4, col: 0 },
+            { number: 4, clue: "만화나 애니메이션 캐릭터를 만드는 사람", answer: "애니메이터", row: 6, col: 2 },
             { number: 5, clue: "미술관이나 박물관에서 작품을 설명해주는 안내인", answer: "도슨트", row: 8, col: 0 },
-            { number: 6, clue: "방송 프로그램의 제작을 총괄하는 사람", answer: "피디", row: 10, col: 1 },
-            { number: 7, clue: "머리카락을 자르거나 스타일링하는 전문가", answer: "미용사", row: 11, col: 5 }
+            { number: 6, clue: "외국어로 된 글을 다른 언어로 바꾸는 사람", answer: "번역가", row: 10, col: 1 },
+            { number: 7, clue: "자신이 만든 옷을 판매하는 사람", answer: "디자이너", row: 11, col: 5 }
         ]
     };
     
