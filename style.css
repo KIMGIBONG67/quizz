@@ -74,7 +74,7 @@ h1, h2 {
     position: absolute;
     font-size: 0.7em;
     font-weight: bold;
-    line-height: 1; /* 줄 높이를 1로 설정하여 겹침 방지 */
+    line-height: 1;
 }
 
 .cell .number.across {
