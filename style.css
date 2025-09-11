@@ -1,54 +1,148 @@
-#quiz-board {
-    display: grid;
-    grid-template-columns: repeat(20, 30px);
-    gap: 2px;
-    margin: 20px 0;
-    justify-content: center;
+body {
+font-family: Arial, sans-serif;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+background-color: #f4f4f4;
+padding: 20px;
+color: #333;
 }
+
+.container {
+text-align: center;
+background-color: #fff;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+max-width: 900px;
+width: 100%;
+}
+
+h1 {
+color: #4a4a4a;
+}
+
+#quiz-board {
+display: grid;
+grid-template-columns: repeat(20, 30px);
+gap: 2px;
+margin: 20px 0;
+justify-content: center;
+}
+
 .cell {
-    width: 30px;
-    height: 30px;
-    border: 1px solid #ccc;
-    background-color: #eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative; /* 이 부분을 추가해주세요 */
-    font-size: 14px;
+width: 30px;
+height: 30px;
+border: 1px solid #ccc;
+background-color: #eee;
+display: flex;
+justify-content: center;
+align-items: center;
+position: relative;
+font-size: 14px;
 }
 
 .cell.active {
-    background-color: #fff;
+background-color: #fff;
+}
+
+.cell input {
+width: 100%;
+height: 100%;
+border: none;
+text-align: center;
+background-color: transparent;
+font-size: 14px;
+text-transform: uppercase;
+padding: 0;
+margin: 0;
+box-sizing: border-box;
 }
 
 .cell .clue-number {
-    position: absolute; /* 이 부분을 추가해주세요 */
-    top: 2px;
-    left: 2px;
-    font-size: 8px;
-    color: #555;
-    font-weight: bold;
+position: absolute;
+top: 2px;
+left: 2px;
+font-size: 8px;
+font-weight: bold;
 }
-/* style.css */
 
-/* ... (기존 CSS 코드 유지) ... */
+.cell.wrong {
+background-color: #ffcccc !important;
+}
+
+.buttons {
+margin: 20px 0;
+}
+
+.buttons button {
+padding: 10px 20px;
+margin: 0 5px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-size: 16px;
+font-weight: bold;
+color: #fff;
+transition: background-color 0.3s;
+}
+
+.buttons button:first-child {
+background-color: #007bff;
+}
+
+.buttons button:first-child:hover {
+background-color: #0056b3;
+}
+
+.buttons button:last-child {
+background-color: #6c757d;
+}
+
+.buttons button:last-child:hover {
+background-color: #5a6268;
+}
+
+.clues-container {
+display: flex;
+justify-content: space-around;
+text-align: left;
+margin-top: 20px;
+}
+
+.clues-list h3 {
+margin-top: 0;
+font-size: 1.2em;
+border-bottom: 2px solid #ccc;
+padding-bottom: 5px;
+}
+
+.clues-list p {
+margin: 5px 0;
+line-height: 1.4;
+}
+
+#message {
+margin-top: 15px;
+font-weight: bold;
+font-size: 1.2em;
+}
 
 /* 보드 위 번호 색상 */
 .clue-number.across {
-    color: blue;
+color: blue;
 }
 
 .clue-number.down {
-    color: red;
+color: red;
 }
 
 /* 문제 목록 글자 색상 */
 .across-clue {
-    color: blue;
+color: blue;
 }
 
 .down-clue {
-    color: red;
+color: red;
 }
-
-
