@@ -167,3 +167,14 @@ document.addEventListener('DOMContentLoaded', () => {
     displayClues();
     checkButton.addEventListener('click', checkAnswers);
 });
+
+function setupBoard() {
+    puzzles.across.forEach(p => {
+        // ... (기존 코드)
+    });
+
+    puzzles.down.forEach(p => {
+        // ... (기존 코드)
+    });
+    console.log(boardData); // 이 줄을 추가하세요.
+}
