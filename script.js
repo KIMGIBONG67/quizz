@@ -9,22 +9,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const puzzles = {
         across: [
-            { number: 1, clue: "손님에게 맛있는 음식을 만들어 제공하는 사람", answer: "요리사", row: 0, col: 0 },
-            { number: 2, clue: "꽃을 다듬고 장식하는 전문가", answer: "플로리스트", row: 2, col: 1 },
-            { number: 3, clue: "개인이나 회사의 수입과 지출을 기록하고 관리하는 사람", answer: "회계사", row: 4, col: 0 },
-            { number: 4, clue: "미술관에서 작품을 해설하고 관리하는 직업", answer: "큐레이터", row: 6, col: 2 },
-            { number: 5, clue: "국가나 지방 공공 기관에서 일하는 사람", answer: "공무원", row: 8, col: 0 },
-            { number: 6, clue: "외국어로 된 글을 다른 언어로 바꾸는 사람", answer: "번역가", row: 10, col: 1 },
-            { number: 7, clue: "책이나 글을 쓰는 사람", answer: "작가", row: 11, col: 5 }
+            { number: 1, clue: "데이터를 분석하여 비즈니스 의사결정을 돕는 사람", answer: "데이터분석가", row: 0, col: 0 },
+            { number: 2, clue: "책이나 잡지 등에 들어가는 그림을 그리는 사람", answer: "일러스트레이터", row: 2, col: 0 },
+            { number: 3, clue: "사람들의 심리적인 어려움을 해결해 주는 전문가", answer: "심리상담사", row: 4, col: 1 },
+            { number: 4, clue: "방송에서 뉴스를 읽고 전달하는 직업", answer: "아나운서", row: 6, col: 0 },
+            { number: 5, clue: "손님의 주문에 맞춰 커피를 만드는 사람", answer: "바리스타", row: 8, col: 2 },
+            { number: 6, clue: "미술관에서 작품을 해설하고 관리하는 직업", answer: "큐레이터", row: 10, col: 0 },
+            { number: 7, clue: "아픈 동물을 치료해 주는 의사", answer: "수의사", row: 11, col: 5 },
+            { number: 8, clue: "개인이나 회사의 수입과 지출을 기록하고 관리하는 사람", answer: "회계사", row: 9, col: 7 },
+            { number: 9, clue: "국가나 지방 공공 기관에서 일하는 사람", answer: "공무원", row: 7, col: 2 },
+            { number: 10, clue: "외국어로 된 글을 다른 언어로 바꾸는 사람", answer: "번역가", row: 5, col: 7 }
         ],
         down: [
-            { number: 1, clue: "요가를 가르치는 전문가", answer: "요가강사", row: 0, col: 0 },
-            { number: 2, clue: "배의 운전과 운항을 책임지는 사람", answer: "선장", row: 2, col: 1 },
-            { number: 3, clue: "손님의 주문에 맞춰 커피를 만드는 사람", answer: "바리스타", row: 4, col: 0 },
-            { number: 4, clue: "아픈 동물을 치료해 주는 의사", answer: "수의사", row: 6, col: 2 },
-            { number: 5, clue: "미술관이나 박물관에서 작품을 설명해주는 안내인", answer: "도슨트", row: 8, col: 0 },
-            { number: 6, clue: "방송 프로그램의 제작을 총괄하는 사람", answer: "피디", row: 10, col: 1 },
-            { number: 7, clue: "머리카락을 자르거나 스타일링하는 전문가", answer: "미용사", row: 11, col: 5 }
+            { number: 1, clue: "디지털 기기를 활용해 자유롭게 일하는 사람", answer: "디지털노마드", row: 0, col: 0 },
+            { number: 2, clue: "어린 아이들을 가르치고 돌보는 선생님", answer: "유치원교사", row: 1, col: 4 },
+            { number: 3, clue: "직업으로 게임을 하는 사람", answer: "프로게이머", row: 2, col: 7 },
+            { number: 4, clue: "미술을 가르치는 선생님", answer: "회화선생님", row: 4, col: 1 },
+            { number: 5, clue: "만화나 애니메이션 캐릭터를 만드는 사람", answer: "애니메이터", row: 3, col: 9 },
+            { number: 6, clue: "불이 난 곳에서 사람을 구하는 사람", answer: "소방관", row: 6, col: 4 },
+            { number: 7, clue: "맛있는 음식을 만드는 사람", answer: "요리사", row: 8, col: 2 },
+            { number: 8, clue: "배를 운전하여 바다를 항해하는 사람", answer: "선장", row: 1, col: 10 },
+            { number: 9, clue: "책이나 글을 쓰는 사람", answer: "작가", row: 7, col: 7 },
+            { number: 10, clue: "법률 전문가로, 법정에서 변론을 맡는다", answer: "변호사", row: 5, col: 11 }
         ]
     };
     
