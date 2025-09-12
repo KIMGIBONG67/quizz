@@ -94,8 +94,13 @@
             outline: none;
             box-sizing: border-box;
             padding: 0;
+            z-index: 20; /* 입력창의 z-index를 높여 터치 인식 개선 */
         }
 
+        .cell input:focus {
+            z-index: 30; /* 포커스 시 z-index를 더 높여 키보드/커서 문제 해결 */
+        }
+        
         .cell .number {
             position: absolute;
             font-size: 0.7em;
@@ -300,6 +305,15 @@
                             input.dataset.row = row;
                             input.dataset.col = col;
                             cell.appendChild(input);
+
+                            // 모바일 터치 문제 해결을 위한 z-index 조절
+                            input.addEventListener('focus', () => {
+                                input.style.zIndex = 30;
+                            });
+
+                            input.addEventListener('blur', () => {
+                                input.style.zIndex = 20;
+                            });
 
                             const acrossClue = puzzles.across.find(p => p.row === row && p.col === col);
                             const downClue = puzzles.down.find(p => p.row === row && p.col === col);
