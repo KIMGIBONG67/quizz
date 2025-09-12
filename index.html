@@ -309,6 +309,7 @@
                             // 모바일 터치 문제 해결을 위한 z-index 조절
                             input.addEventListener('focus', () => {
                                 input.style.zIndex = 30;
+                                input.value = ''; // 수정할 때 글자 바로 지우기
                             });
 
                             input.addEventListener('blur', () => {
